@@ -10,6 +10,9 @@ The script will create a .csv file with the capacity information by host.
 ![Screenshot of the csv output.](https://github.com/murphyry/powerflex-host-capacity/blob/main/csv_example.png)
 
 # Directions
+### Pre-reqs:
+- This script makes API calls to the PowerFlex Manager API using the curl package.
+- This script parses the API call output using the jq package.
 ### Download the script:
 - ```wget https://raw.githubusercontent.com/murphyry/powerflex-host-capacity/refs/heads/main/powerflex_host_capacity.sh```
 ### Edit the script and add your PowerFlex Manager username, password, and IP address in the "SCRIPT VARIABLES" section at the top:
