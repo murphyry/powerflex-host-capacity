@@ -3,9 +3,9 @@
 # Make sure you have curl and jq installed
 
 #SCRIPT VARIABLES - PUT YOUR POWERFLEX MANAGER CREDENTIALS IN HERE
-PFXM_IP=<YOUR_IP>
-PFXM_USER=<YOUR_USERNAME>
-PFXM_PASSWORD=<YOUR_PASSWORD>
+PFXM_IP='YOUR_IP'
+PFXM_USER='YOUR_USERNAME'
+PFXM_PASSWORD='YOUR_PASSWORD'
 
 ###########################################################################################################################################################  
 #SCRIPT COLORS FOR ECHO  
@@ -34,7 +34,7 @@ ACCESS_TOKEN=$(echo "${TOKEN}" | jq -r .access_token)
 #Get system id
 SYSTEM=$(curl -k -s -X GET "https://$PFXM_IP/api/types/System/instances/" -H 'Accept: application/json' -H 'Content-Type: application/json' -H "Authorization: Bearer $ACCESS_TOKEN")
 SYSTEM_ID=$(echo $SYSTEM | jq .[].id| tr -d '"')
-echo -e "${GREEN}[SUCCESS] - Connected to PowerFlex system ${SYSTEM_ID}. querying hosts:${NC}"
+echo -e "${GREEN}[SUCCESS] - Connected to PowerFlex system ${SYSTEM_ID}${NC}"
 echo " "
 echo -e "${CYAN}[QUERYING HOSTS]${NC}"
 
