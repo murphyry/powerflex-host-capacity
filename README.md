@@ -5,6 +5,11 @@ The script will create a .csv file with the capacity information by host.
 
 **Note:** This script is not cluster aware and will total up capacity for each cluster node like its a standalone host.
 
+![Screenshot of the script being run.](https://github.com/murphyry/powerflex-host-capacity/blob/main/script_output_example.PNG)
+
+![Screenshot of the csv output.](https://github.com/murphyry/powerflex-host-capacity/blob/main/csv_example.png)
+
+# Directions
 ### Download the script:
 - ```wget https://raw.githubusercontent.com/murphyry/powerflex-host-capacity/refs/heads/main/powerflex_host_capacity.sh```
 ### Edit the script and add your PowerFlex Manager username, password, and IP address:
