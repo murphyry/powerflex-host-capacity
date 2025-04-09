@@ -6,15 +6,15 @@
 PFXM_IP=<YOUR_IP>
 PFXM_USER=<YOUR_USERNAME>
 PFXM_PASSWORD=<YOUR_PASSWORD>
-  
+
 ###########################################################################################################################################################  
 #SCRIPT COLORS FOR ECHO  
-RED='\033[0;31m'  
-GREEN='\033[0;32m'  
-CYAN='\033[0;36m'  
-LIGHT_PURPLE='\033[1;35m'  
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+LIGHT_PURPLE='\033[1;35m'
 YELLOW='\033[1;33m'  
-NC='\033[0m' # No Color 
+NC='\033[0m'
 
 #Start SCRIPT
 echo " "
@@ -37,6 +37,7 @@ SYSTEM_ID=$(echo $SYSTEM | jq .[].id| tr -d '"')
 echo -e "${GREEN}[SUCCESS] - Connected to PowerFlex system ${SYSTEM_ID}. querying hosts:${NC}"
 echo " "
 echo -e "${CYAN}[QUERYING HOSTS]${NC}"
+
 #Create CSV to hold information for hosts
 CSV_NAME="${SYSTEM_ID}_capacity_report.csv"
 echo "HOST_NAME,SDC_ID,OPERATING_SYSTEM,SDC_STATE,SDC_VERSION,VOLUMES_MAPPED,VOLUME_PROVISIONED_KIB,VOLUME_USED_KIB" > $CSV_NAME
