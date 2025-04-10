@@ -41,7 +41,7 @@ echo -e "${CYAN}[QUERYING HOSTS]${NC}"
 
 #Create CSV file to hold information for hosts
 CSV_NAME="${SYSTEM_ID}_capacity_report.csv"
-echo "HOST_NAME,SDC_ID,OPERATING_SYSTEM,SDC_STATE,SDC_VERSION,VOLUMES_MAPPED,VOLUME_PROVISIONED_KIB,VOLUME_USED_KIB" > $CSV_NAME
+echo "HOST_NAME,SDC_ID,OPERATING_SYSTEM,SDC_STATE,SDC_VERSION,VOLUMES_MAPPED,VOLUME_PROVISIONED_GIB,VOLUME_USED_GIB" > $CSV_NAME
 
 #Get all SDCs connected to the system and extract all SDC IDs into an array
 HOSTS=$(curl -k -s -X GET "https://$PFXM_IP/api/types/Sdc/instances" -H 'Accept: application/json' -H 'Content-Type: application/json' -H "Authorization: Bearer $ACCESS_TOKEN")
@@ -86,17 +86,19 @@ for HOST in "${bash_array[@]}"; do
     
     #update the host totals
     TOTAL_IN_USE_KIB=$(($TOTAL_IN_USE_KIB + $VTREE_IN_USE))
-    TOTAL_VOLUMES=$(($TOTAL_VOLUMES + 1))
     TOTAL_SIZE_KIB=$(($TOTAL_SIZE_KIB + $VOLUME_SIZE))
+	TOTAL_VOLUMES=$(($TOTAL_VOLUMES + 1))
+	
   done
+  #convert from KIB to GIB
+  TOTAL_SIZE_GIB=$(($TOTAL_SIZE_KIB /1024 / 1024)) 
+  TOTAL_IN_USE_GIB=$(($TOTAL_IN_USE_KIB /1024 / 1024)) 
   
   #Add the SDC's entry to CSV file
-  echo "${SDC_NAME},${SDC_ID},${SDC_OS},${SDC_STATE},${SDC_VERSION},${TOTAL_VOLUMES},${TOTAL_SIZE_KIB},${TOTAL_IN_USE_KIB}" >> $CSV_NAME
-
-  sleep 1
-  
+  echo "${SDC_NAME},${SDC_ID},${SDC_OS},${SDC_STATE},${SDC_VERSION},${TOTAL_VOLUMES},${TOTAL_SIZE_GIB},${TOTAL_IN_USE_GIB}" >> $CSV_NAME
+ 
+  #sleep before next host
   echo -e "${CYAN}-HOST [$SDC_NAME] COMPLETE ${NC}"  
-  
   sleep 2
 done
 
