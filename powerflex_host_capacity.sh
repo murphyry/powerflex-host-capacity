@@ -91,8 +91,8 @@ for HOST in "${bash_array[@]}"; do
 	
   done
   #convert from KIB to GIB
-  TOTAL_SIZE_GIB=$(($TOTAL_SIZE_KIB /1024 / 1024)) 
-  TOTAL_IN_USE_GIB=$(($TOTAL_IN_USE_KIB /1024 / 1024)) 
+  TOTAL_SIZE_GIB=$(echo "scale=2; ${TOTAL_SIZE_KIB}/1024/1024" | bc) 
+  TOTAL_IN_USE_GIB=$(echo "scale=2; ${TOTAL_IN_USE_KIB}/1024/1024" | bc) 
   
   #Add the SDC's entry to CSV file
   echo "${SDC_NAME},${SDC_ID},${SDC_OS},${SDC_STATE},${SDC_VERSION},${TOTAL_VOLUMES},${TOTAL_SIZE_GIB},${TOTAL_IN_USE_GIB}" >> $CSV_NAME
