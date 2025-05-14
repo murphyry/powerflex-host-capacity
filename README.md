@@ -21,5 +21,5 @@ The script will create a .csv file with the capacity information by host.
 ### Make the script executable:
 - ```chmod +x powerflex_host_capacity.sh```
 ### Run the script to generate the .csv file:
-- ```bash powerflex_host_capacity.sh```
+- ```./powerflex_host_capacity.sh```
 
